@@ -2,6 +2,8 @@ This is a Simple WebApp built using MERN Stack
 To run this on your machine-
    Make a local copy of this and then open the folder in VSCode (or any editor of your choice)!
    Run npm install in login directory to install required node modules
+   Create a build and deploy directory.
+   Copy Bootstrap from app/client/public to build.
    Make sure you have mongodb installed on machine 
    Run mongodb  and then follow steps given in app/server/src/scripts/dataDb.js
    Rename sample.env to .env
