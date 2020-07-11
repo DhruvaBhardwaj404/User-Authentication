@@ -4,4 +4,5 @@ To run this on your machine-
    Run npm install in login directory to install required node modules
    Make sure you have mongodb installed on machine 
    Run mongodb  and then follow steps given in app/server/src/scripts/dataDb.js
+   Rename sample.env to .env
    Then using npm run the app!!
