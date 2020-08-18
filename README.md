@@ -1,5 +1,5 @@
 # User-Authentication
-This is an app that authenticates user and serves them their data.
+This is an App that authenticates user and serves them their data!
 
 ![Login Page](https://github.com/DhruvaBhardwaj404/User-Authentication/blob/master/login1)
 ![Information Page](https://github.com/DhruvaBhardwaj404/User-Authentication/blob/master/login%202.png)

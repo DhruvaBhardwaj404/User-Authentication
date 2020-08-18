@@ -1,12 +1,26 @@
-import React, { Component } from 'react'
-import {BrowserRouter as Router,Switch,Route,Redirect} from 'react-router-dom'
+import React, { Component,useState,useEffect} from 'react'
+import {Switch,Route,Redirect} from 'react-router-dom'
 import Login from './Components/Login.jsx';
 import Content from './Components/Content.jsx';
 import Register from './Components/Register.jsx';
 import NotFound from './Components/NotFound.jsx';
+import verify from './Components/verify.js';
+import info from './Components/info.js';
 
 function Main() {
-        return (
+    
+   const [check, setCheck] = useState(false)
+   
+   async function set(){ 
+    await verify();
+    if(check!==info.logStatus){
+        setCheck(info.logStatus)
+    }}
+    
+   useEffect( () => {
+       set();
+   }, []);
+    return (
             <section style={{height:'100hv'}} className="bg-dark container-md p-3 scroll-spy">
                   <Switch>
                       <Redirect exact from='/' to='/login' />

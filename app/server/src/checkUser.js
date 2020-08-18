@@ -12,4 +12,16 @@ async function checkUser(data){
     }
 }
 
-module.exports ={checkUser}
+
+async function getData(username){
+    const ress= await User.exists({username});
+    //console.log(ress)
+    if(ress){
+        return User.findOne({username});
+    }
+    else{
+        return null
+    }
+}
+
+module.exports ={checkUser,getData}

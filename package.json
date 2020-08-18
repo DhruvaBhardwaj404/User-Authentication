@@ -15,6 +15,7 @@
   "author": "Dhruva Bhardwaj",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.19.2",
     "body-parser": "^1.18.2",
     "bootstrap": "^4.5.0",
     "dotenv": "^4.0.0",

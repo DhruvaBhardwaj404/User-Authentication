@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Log from './Log.js';
 import { LinkContainer } from 'react-router-bootstrap';
 import info from './info.js';
-
+import logOut from './logOut.js'
 
 class Login extends Component {
     constructor(props) {
@@ -57,10 +57,11 @@ class Login extends Component {
         }
      }
  
-     logOutHandler(){
+     async logOutHandler(){
          info.logStatus=false;
          info.data={};
          this.setState({loggedIn:false})
+         await logOut();
      }
 
 

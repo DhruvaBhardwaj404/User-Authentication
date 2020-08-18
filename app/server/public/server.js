@@ -4,7 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const https=require('https');
 const fs=require('fs');
-const {checkUser}=require('../src/checkUser.js');
+const {checkUser,getData}=require('../src/checkUser.js');
 const  {writeData} = require('../src/writeData.js');
 const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
@@ -46,8 +46,8 @@ app.post('/auth',async (req,res)=>{
   const exist= await checkUser(req.body.query);
   if(await exist){
    
-      const token= await jwt.sign({username:await req.body.query.username},Skey);
-    
+      const token= await jwt.sign({username:await req.body.query.username},Skey,{expiresIn:'600000'});
+      res.clearCookie('token');
       res.cookie('token',token,{httpOnly:true});
       res.status(200).send(JSON.stringify({body:exist}));
   }
@@ -56,6 +56,26 @@ app.post('/auth',async (req,res)=>{
   }
 })
 
+app.post('/verify',async (req,res)=>{
+   let data;
+   if(req.headers.cookie){
+    //console.log('here');
+    const  token =  req.headers.cookie.split('=');
+     const exist=  jwt.verify(token[1],Skey);
+     //console.log(exist);
+    data= await getData(exist.username);
+    res.send(JSON.stringify({data}));
+  }
+  else{
+    res.clearCookie('token');
+     res.send(JSON.stringify({data:"Not Logged In!"}));
+  }
+})
+
+app.post('/logout',(req,res)=>{
+  res.clearCookie('token');
+  res.send(JSON.stringify({message:"success"}))
+})
 
 
 //======== new user registeration=====// 
@@ -79,7 +99,8 @@ app.get('*', (req, res) => {
 
 https.createServer({
   key:fs.readFileSync('app/server/src/ssl/key.pem'),
-  cert:fs.readFileSync('app/server/src/ssl/certificate.pem'),
+  cert:fs.readFileSync('app/server/src/ssl/cert.pem'),
+  passphrase:'A1B2C3D4'
   
 },app).listen(port,()=>{
   console.log(`server running on ${port}`);

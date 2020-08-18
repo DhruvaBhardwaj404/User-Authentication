@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component,} from 'react'
 import info from './info'
-
 
 
 class Content extends Component {
@@ -10,11 +9,20 @@ class Content extends Component {
         this.state = {
                 data:info.data
         }
+     this.check=this.check.bind(this)
+    }
+
+    check(){
+       setTimeout(()=>{
+           if(this.state.data!=info.data){
+               this.setState({data:info.data});
+           }
+       },3000)
     }
 
 
-
     render() {
+        this.check();
         if(info.logStatus){
         return (
             <div className='container-fluid alert-success'>
